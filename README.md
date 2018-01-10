@@ -12,3 +12,6 @@ Added some R code to use the csv data as well as the Rcode's output
 
 2018-01-08 215pm CST
 Added comments to the R code so the students would have a better idea of what's going on
+
+2018-01-09 7:30pm CST
+Added a python script that does the same thing as the R script "make_EIA_data_likert_chart_single"
