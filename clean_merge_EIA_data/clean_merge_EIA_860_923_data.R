@@ -39,10 +39,10 @@ clean_merge_EIA_860_923_data <- function(F860_data, F932_data, F860M_data){
   ######## clean up F923 data  ######## 
   
   #aggregate F923 data in order to get total MWh generated based on plant ID, operator ID, prime mover, and fuel type
-  a1 <- aggregate(x = f923$Net.Generation..Megawatthours., by = list(f923$Plant.Id, f923$Operator.Id, f923$Reported.Prime.Mover, f923$Reported.Fuel.Type.Code), FUN = sum)
+  a1 <- aggregate(x = cbind(f923$Net.Generation..Megawatthours., f923$Total.Fuel.Consumption.MMBtu), by = list(f923$Plant.Id, f923$Operator.Id, f923$Reported.Prime.Mover, f923$Reported.Fuel.Type.Code), FUN = sum)
   
   #rename the columns after aggregate in order to make easier to read
-  names(a1) <- c('Plant.Id', 'Operator.Id', 'Reported.Prime.Mover', 'Reported.Fuel.Type.Code', 'Net.Generation..Megawatthours.')
+  names(a1) <- c('Plant.Id', 'Operator.Id', 'Reported.Prime.Mover', 'Reported.Fuel.Type.Code', 'Net.Generation..Megawatthours.', 'Total.Fuel.Consumption.MMBtu')
   
   ######## merge F860 anf F923 data together  ########   
   
@@ -57,7 +57,9 @@ clean_merge_EIA_860_923_data <- function(F860_data, F932_data, F860M_data){
   print(paste('Capacity in final dataset: ', round(cap*100, 2), '%', sep = ''))
   print(paste('Energy in final dataset: ', round(energy*100, 2), '%', sep = ''))
   
+  #calcualte capacity factor and heat rate 
   m3$cap_fac <- m3$Net.Generation..Megawatthours./(m3$Nameplate.Capacity*8760)
+  m3$heat_rate <- m3$Total.Fuel.Consumption.MMBtu*1000/m3$Net.Generation..Megawatthours.
   
   write.csv(x = m3, file = 'merged_2016_f860_f923_data.csv', row.names = F)
   
@@ -90,7 +92,7 @@ clean_merge_EIA_860_923_data <- function(F860_data, F932_data, F860M_data){
   #write up datasets
   write.csv(data, 'complete_eia_data_2016.csv', row.names = F)
   
-  #return the data frame data to the consule, must use call form: data <- clean_merge_EIA_860_923_data(F860_data = 'F860.csv', F932_data = 'F923.csv', F860M_data = 'F860M.csv') or data will be printed to console 
-  # return(data)  
+
+  return(data)  
   
 }

@@ -18,4 +18,7 @@ Added a python script that does the same thing as the R script "make_EIA_data_li
 
 2018-01-12 2:52pm CST
 Added directory "clean_merge_EIA_data" with input CSVs and R code inside. R code reads CSV files to clean and merge datasets together + calcualtes the capacity factor
+
+2018-01-12 4:05pm CST
+Edited clean_merge_EIA_data/clean_merge_EIA_860_923_data.R to calcuate heat rate from power plants ** SHOULD TALK ABOUT CRAZY HR #'s IN CLASS AS DATA EXAMPLE**
   
