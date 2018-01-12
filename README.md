@@ -15,3 +15,7 @@ Added comments to the R code so the students would have a better idea of what's 
 
 2018-01-09 7:30pm CST
 Added a python script that does the same thing as the R script "make_EIA_data_likert_chart_single"
+
+2018-01-12 2:52pm CST
+Added directory "clean_merge_EIA_data" with input CSVs and R code inside. R code reads CSV files to clean and merge datasets together + calcualtes the capacity factor
+  
